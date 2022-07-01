@@ -9,7 +9,7 @@ Param (
         [System.Management.Automation.PSCredential]$domainAdminCredentials
 	)
 
-Import-DscResource -ModuleName PSDesiredStateConfiguration, xActiveDirectory, xPendingReboot, xStorage, xNetworking, ComputerManagementDSC
+Import-DscResource -ModuleName xActiveDirectory, xStorage, xNetworking, PSDesiredStateConfiguration, xPendingReboot
 
 [System.Management.Automation.PSCredential ]$DomainCreds = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($domainAdminCredentials.UserName)", $domainAdminCredentials.Password)
 
