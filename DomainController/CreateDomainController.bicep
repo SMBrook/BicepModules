@@ -63,7 +63,7 @@ resource DC1 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       imageReference:{
         publisher: 'MicrosoftWindowsServer'
         offer: 'WindowsServer'
-        sku: '2019-Datacenter'
+        sku: '2022-Datacenter'
         version: 'latest'
       }
       osDisk: {
@@ -128,7 +128,7 @@ resource DSCCreateForest 'Microsoft.Compute/virtualMachines/extensions@2022-03-0
 //      ConfigurationFunction: 'CreateADPDC.ps1\\CreateADPDC'
       Properties: {
         domainName: domainName
-        domainAdminCreds: {
+        domainAdminCredentials: {
           UserName: adminUsername
           Password: 'PrivateSettingsRef:adminPassword'
         }
