@@ -6,12 +6,12 @@ Param (
 	  [string] $domainName,
 	
         [Parameter(Mandatory)]
-        [System.Management.Automation.PSCredential]$domainAdminCreds
+        [System.Management.Automation.PSCredential]$domainAdminCredentials
 	)
 
-Import-DscResource -ModuleName xActiveDirectory, xStorage, xNetworking, PSDesiredStateConfiguration, xPendingReboot
+Import-DscResource -ModuleName PSDesiredStateConfiguration, xActiveDirectory, xPendingReboot, xStorage, xNetworking
 
-[System.Management.Automation.PSCredential ]$DomainCreds = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($domainAdminCreds.UserName)", $domainAdminCreds.Password)
+[System.Management.Automation.PSCredential ]$DomainCreds = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($domainAdminCredentials.UserName)", $domainAdminCredentials.Password)
 
 Node localhost
   {
@@ -80,12 +80,6 @@ Node localhost
             Ensure = 'Present'
             Name   = 'RSAT-Role-Tools'
         }      
- 
-        WindowsFeature RSAT_GPMC 
-        {
-            Ensure = 'Present'
-            Name   = 'GPMC'
-        } 
         xADDomain CreateForest 
         { 
             DomainName = $domainName           
@@ -94,7 +88,7 @@ Node localhost
             DatabasePath = "C:\Windows\NTDS"
             LogPath = "C:\Windows\NTDS"
             SysvolPath = "C:\Windows\Sysvol"
-            DependsOn = '[WindowsFeature]ADDS_Install'
+            DependsOn = "[WindowsFeature]ADDS_Install"
         }
 
   }
