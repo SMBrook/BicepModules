@@ -6,12 +6,12 @@ Param (
 	  [string] $domainName,
 	
         [Parameter(Mandatory)]
-        [System.Management.Automation.PSCredential]$domainAdminCredentials
+        [System.Management.Automation.PSCredential]$domainAdminCreds
 	)
 
 Import-DscResource -ModuleName xActiveDirectory, xStorage, xNetworking, PSDesiredStateConfiguration, xPendingReboot
 
-[System.Management.Automation.PSCredential ]$DomainCreds = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($domainAdminCredentials.UserName)", $domainAdminCredentials.Password)
+[System.Management.Automation.PSCredential ]$DomainCreds = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($domainAdminCreds.UserName)", $domainAdminCreds.Password)
 
 Node localhost
   {

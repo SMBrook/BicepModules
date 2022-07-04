@@ -129,7 +129,7 @@ resource DSCCreateForest 'Microsoft.Compute/virtualMachines/extensions@2022-03-0
       Properties: {
         domainName: domainName
         domainAdminCreds: {
-          UserName: 'TestAdmin'
+          UserName: adminUsername
           Password: 'PrivateSettingsRef:adminPassword'
         }
       }
